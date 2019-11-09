@@ -75,6 +75,8 @@ function hoursWorkedOnDate(workObj, dateWork) {
     return WorkHours;
 }
 
+
+
 //6
 function wagesEarnedOnDate(earnObj, earnDate) {
 
@@ -82,58 +84,65 @@ function wagesEarnedOnDate(earnObj, earnDate) {
     console.log(payOwed);
     return payOwed;
 }
-//wagesEarnedOnDate(newObj, "44-03-15")
+
 
 //7
-function allWagesFor(allObj) {
+// function allWagesFor(allObj) {
 
-    //console.log(allObj.timeInEvents.length);
+//     //console.log(allObj.timeInEvents.length);
 
-    let MyObject = allObj.timeInEvents
+//     let MyObject = allObj.timeInEvents
 
-    let array = [];
-    let PayAll = 0;
-    for (const element in MyObject) {
-        // console.log(Object[element]["date"]);
-        let PayAll = wagesEarnedOnDate(allObj, MyObject[element]["date"])
-        console.log(PayAll);
-        array.push(PayAll);
-        // console.log(array);
-    }
-    //accumulate the value of all dates worked by the employee 
-    //console.log("this is the array" + array);
-    return array.reduce(function (total, item) { return total += item; })
+//     let array = [];
+//     let PayAll = 0;
+//     for (const element in MyObject) {
+//         // console.log(Object[element]["date"]);
+//         let PayAll = wagesEarnedOnDate(allObj, MyObject[element]["date"])
+//         console.log(PayAll);
+//         array.push(PayAll);
+//         // console.log(array);
+//     }
+//     //accumulate the value of all dates worked by the employee 
+//     //console.log("this is the array" + array);
+//     return array.reduce(function (total, item) { return total += item; })
+// }
+
+//7
+function allWagesFor(ArrObj) {
+    let eligibleDates = ArrObj.timeInEvents.map(function (obj) {
+        return obj.date
+    })
 }
 
 //8
-    function calculatePayroll(array) { //returns sum of pay of all employees for all dates
-        let sum = array.map((e) => allWagesFor(e))
-        return sum.reduce((num, sum) => num + sum)
+function calculatePayroll(array) { //returns sum of pay of all employees for all dates
+    let sum = array.map((e) => allWagesFor(e))
+    return sum.reduce((num, sum) => num + sum)
+}
+
+
+//9
+function createEmployeeRecords(src) {
+
+    let newArr = [];
+    //creates two records
+    for (const element of src) {
+        let test = createEmployeeRecord(element)
+        newArr.push(test)
+        // console.log(newArr);
     }
 
-
-    //9
-    function createEmployeeRecords(src) {
-
-        let newArr = [];
-        //creates two records
-        for (const element of src) {
-            let test = createEmployeeRecord(element)
-            newArr.push(test)
-            // console.log(newArr);
-        }
-
-        //return is an array of objects
-        return newArr;
-    }
+    //return is an array of objects
+    return newArr;
+}
 
 
-    //10
-    function findEmployeebyFirstName(array, firstName) {
+//10
+function findEmployeebyFirstName(array, firstName) {
 
-        return array.find(function (obj) {
-            return obj.firstName == firstName;
-        });
+    return array.find(function (obj) {
+        return obj.firstName == firstName;
+    });
 
-    }
+}
 
